@@ -6,20 +6,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AuthResponseDTO(
-    @SerialName("token")
-    val token: String,
+    @SerialName("token") val token: String,
 
-    @SerialName("user")
-    val user: UserResponseDTO,
+    @SerialName("user") val user: UserResponseDTO,
 
-    override val status: Boolean,
-    override val title: String,
-    override val message: String? = null,
-) : BaseResponseDTO(
-    status = status,
-    title = title,
-    message = message
-)
+    @SerialName("status") override val status: Boolean,
+    @SerialName("title") override val title: String,
+    @SerialName("message") override val message: String? = null,
+) : BaseResponseDTO
 
 @Serializable
 data class UserResponseDTO(

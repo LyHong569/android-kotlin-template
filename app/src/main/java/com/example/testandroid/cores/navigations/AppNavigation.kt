@@ -9,11 +9,12 @@ import com.example.testandroid.features.profile.presentation.ProfileScreen
 
 @Composable
 fun AppNavigation(navigator: Navigator) {
+    if (navigator.backStack.isEmpty()) return
+
     NavDisplay(
         backStack = navigator.backStack,
         onBack = { navigator.goBack() },
         entryProvider = entryProvider {
-
             // Auth
             entry<Login> { LoginScreen(navigator) }
 

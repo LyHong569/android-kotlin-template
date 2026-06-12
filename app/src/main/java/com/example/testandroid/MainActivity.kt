@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -41,14 +42,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             val authState by mainViewModel.authState.collectAsStateWithLifecycle()
             val isConnected by mainViewModel.isConnect.collectAsStateWithLifecycle()
-            val navigator = remember { Navigator() }
+
+            if (authState == AuthState.Loading) return@setContent
+
+            val navigator = key(authState) {
+                remember {
+                    val initialRoute =
+                        if (authState == AuthState.Authenticated) Dashboard else Login
+                    Navigator(initialRoute)
+                }
+            }
 
             LaunchedEffect(authState) {
-                when (authState) {
-                    AuthState.Authenticated -> navigator.replaceAll(Dashboard)
-                    AuthState.Unauthenticated -> navigator.replaceAll(Login)
-                    AuthState.Loading -> Unit
-                }
+                if (authState == AuthState.Unauthenticated) navigator.replaceAll(Login)
             }
 
             TestAndroidTheme {

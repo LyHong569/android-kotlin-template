@@ -3,8 +3,8 @@ package com.example.testandroid.cores.navigations
 import androidx.compose.runtime.mutableStateListOf
 import androidx.navigation3.runtime.NavKey
 
-class Navigator {
-    val backStack = mutableStateListOf<NavKey>(Login)
+class Navigator(initialRoute: NavKey) {
+    val backStack = mutableStateListOf<NavKey>(initialRoute)
 
     fun navigate(route: NavKey) {
         backStack.add(route)

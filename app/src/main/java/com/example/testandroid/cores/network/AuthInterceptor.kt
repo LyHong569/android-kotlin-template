@@ -1,6 +1,8 @@
 package com.example.testandroid.cores.network
 
+import com.example.testandroid.BuildConfig
 import com.example.testandroid.cores.datastores.SessionManager
+import com.example.testandroid.cores.datastores.TokenManager
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Interceptor
@@ -9,18 +11,20 @@ import okhttp3.Response
 import okhttp3.Route
 import javax.inject.Inject
 
-class AuthInterceptor @Inject constructor() : Interceptor {
+class AuthInterceptor @Inject constructor(private val tokenManager: TokenManager) : Interceptor {
 
-    private val API_KEY = ""
-    private val API_SECRET_KEY = ""
-    private val API_KEY_VALUE = ""
-    private val API_SECRET_KEY_VALUE = ""
+    private val apiKey = BuildConfig.API_KEY
+    private val apiSecretKey = BuildConfig.API_SECRET_KEY
+    private val apiKeyValue = BuildConfig.API_KEY_VALUE
+    private val apiSecretKeyValue = BuildConfig.API_SECRET_KEY_VALUE
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        val accessToken = runBlocking { tokenManager.getAccessToken() }
+
         val request = chain.request().newBuilder()
-            .addHeader(API_KEY, API_SECRET_KEY)
-            .addHeader(API_KEY_VALUE, API_SECRET_KEY_VALUE)
-            .addHeader("Authorization", "Bearer")
+            .addHeader(apiKey, apiKeyValue)
+            .addHeader(apiSecretKey, apiSecretKeyValue)
+            .addHeader("Authorization", "Bearer $accessToken")
             .addHeader("Accept", "application/json")
             .build()
 

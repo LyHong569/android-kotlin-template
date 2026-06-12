@@ -1,5 +1,6 @@
 package com.example.testandroid.di
 
+import com.example.testandroid.BuildConfig
 import com.example.testandroid.cores.network.AuthAuthenticator
 import com.example.testandroid.cores.network.AuthInterceptor
 import com.example.testandroid.features.auth.login.data.AuthService
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL: String = "https://api.puthisastra.edu.kh"
+    private const val apiUrl: String = BuildConfig.API_URL
 
     @Provides
     @Singleton
@@ -40,7 +41,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(apiUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthRepositoryImpl @Inject constructor(
-    private val authService: AuthService
+    private val authService: AuthService,
 ) : AuthRepository {
     private fun convertResponse(res: AuthResponseDTO): AuthModel {
         return AuthModel(

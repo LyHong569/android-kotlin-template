@@ -1,9 +1,15 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+}
+
+val localProperties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
 }
 
 android {
@@ -22,6 +28,17 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_URL", "\"${localProperties["API_URL"]}\"")
+        buildConfigField("String", "API_KEY", "\"${localProperties["API_KEY"]}\"")
+        buildConfigField("String", "API_SECRET_KEY", "\"${localProperties["API_SECRET_KEY"]}\"")
+        buildConfigField("String", "API_KEY_VALUE", "\"${localProperties["API_KEY_VALUE"]}\"")
+        buildConfigField(
+            "String",
+            "API_SECRET_KEY_VALUE",
+            "\"${localProperties["API_SECRET_KEY_VALUE"]}\""
+        )
+
     }
 
     buildTypes {
@@ -39,6 +56,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     androidResources {
@@ -95,6 +113,4 @@ dependencies {
 
     // EncryptedSharedPreferences
     implementation(libs.androidx.security.crypto)
-
-
 }
