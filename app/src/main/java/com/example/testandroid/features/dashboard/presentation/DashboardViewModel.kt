@@ -6,7 +6,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(connectivityObserver: ConnectivityObserver) :
+class DashboardViewModel @Inject constructor(
+    connectivityObserver: ConnectivityObserver,
+) :
     ViewModel() {
     val isConnected = connectivityObserver.isConnected
 }

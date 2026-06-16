@@ -17,17 +17,23 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.testandroid.components.NetworkStatusBar
+import com.example.testandroid.components.PermissionDialogHandler
 import com.example.testandroid.cores.navigations.AppNavigation
 import com.example.testandroid.cores.navigations.Dashboard
 import com.example.testandroid.cores.navigations.Login
 import com.example.testandroid.cores.navigations.Navigator
+import com.example.testandroid.cores.permissions.PermissionManager
 import com.example.testandroid.features.auth.login.domain.AuthState
 import com.example.testandroid.ui.theme.TestAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val mainViewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var permissionManager: PermissionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashscreen = installSplashScreen()
@@ -70,6 +76,8 @@ class MainActivity : ComponentActivity() {
                     ) {
                         AppNavigation(navigator = navigator)
                     }
+
+                    PermissionDialogHandler(permissionManager)
                 }
 
             }

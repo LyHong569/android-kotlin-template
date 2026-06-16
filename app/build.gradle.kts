@@ -113,4 +113,7 @@ dependencies {
 
     // EncryptedSharedPreferences
     implementation(libs.androidx.security.crypto)
+
+    // Permission dialog box
+    implementation(libs.accompanist.permissions)
 }

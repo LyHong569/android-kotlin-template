@@ -9,8 +9,7 @@ class Navigator(initialRoute: NavKey) {
     fun navigate(route: NavKey) {
         backStack.add(route)
     }
-
-    // for bottom nav — clear stack and go to root tab
+    
     fun navigateTab(route: NavKey) {
         backStack.clear()
         backStack.add(route)

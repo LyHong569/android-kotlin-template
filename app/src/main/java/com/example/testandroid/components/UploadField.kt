@@ -39,9 +39,37 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.testandroid.cores.utils.openExternally
+import com.example.testandroid.viewModels.UploadViewModel
 
 enum class FileSource { Images, Files, All }
+
+enum class MIMEType(val fileTypes: Array<String>) {
+    IMAGE(
+        arrayOf(
+            "image/jpeg", "image/png",
+        )
+    ),
+    DOC(
+        arrayOf(
+            "application/msword",
+        )
+    ),
+    PDF(
+        arrayOf(
+            "application/pdf"
+        )
+    ),
+    ALL(
+        arrayOf(
+            "application/pdf",
+            "text/csv",
+            "image/jpeg",
+            "image/png"
+        )
+    )
+}
 
 data class FileMeta(
     val uri: Uri,
@@ -62,6 +90,7 @@ fun UploadField(
     maxFiles: Int = 5,
     mimeTypes: Array<String> = arrayOf("*/*"),
     source: FileSource = FileSource.All,
+    uploadViewModel: UploadViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     val multiple = maxFiles != 1
@@ -90,7 +119,7 @@ fun UploadField(
     val gallerySingle = rememberLauncherForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri -> uri?.let { addUris(listOf(it)) } }
-    
+
     val galleryMulti = rememberLauncherForActivityResult(
         ActivityResultContracts.PickMultipleVisualMedia(
             maxItems = remainingSlots.coerceIn(2, 100)
@@ -131,7 +160,9 @@ fun UploadField(
         if (showSourceSheet) {
             val sheetState = rememberModalBottomSheetState()
             ModalBottomSheet(
-                onDismissRequest = { showSourceSheet = false },
+                onDismissRequest = {
+                    showSourceSheet = false
+                },
                 sheetState = sheetState,
             ) {
                 ListItem(
