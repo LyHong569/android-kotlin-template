@@ -6,19 +6,11 @@ import android.os.Build
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
+import com.example.testandroid.cores.models.AppLanguages
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-data class Language(
-    val code: String,
-    val displayLanguage: String
-)
-
-val appLanguages = listOf(
-    Language("en", "English"),
-    Language("km", "Khmer"),
-)
 
 // https://blog.kotlin-academy.com/localization-in-jetpack-compose-71b7f7233243
 @Singleton
@@ -47,6 +39,6 @@ class AppLocaleManager @Inject constructor(
     }
 
     private fun getDefaultLanguageCode(): String {
-        return appLanguages.first().code
+        return AppLanguages.first().code
     }
 }

@@ -1,4 +1,4 @@
-package com.example.testandroid.cores.network
+package com.example.testandroid.cores.models
 
 interface BaseResponse {
     val message: String?

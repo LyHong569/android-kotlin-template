@@ -12,7 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.testandroid.cores.datastores.ThemeMode
+import com.example.testandroid.cores.models.ThemeMode
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -27,7 +27,7 @@ private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
     tertiary = Pink40,
-    
+
     surfaceVariant = SkeletonBaseLight,
     surface = SkeletonHighlightLight
 
@@ -52,9 +52,9 @@ fun TestAndroidTheme(
     val currentTheme by themeViewModel.themeFlow.collectAsState(initial = ThemeMode.SYSTEM)
 
     val darkTheme = when (currentTheme) {
-        ThemeMode.DARK -> true
-        ThemeMode.LIGHT -> false
         ThemeMode.SYSTEM -> isSystemInDarkTheme()
+        ThemeMode.DARK -> true
+        else -> false
     }
 
     val colorScheme = when {

@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.example.testandroid.components.upload.FileMeta
 import com.example.testandroid.cores.utils.formatBytes
 import com.example.testandroid.cores.utils.queryFileMeta
 import kotlinx.coroutines.Dispatchers

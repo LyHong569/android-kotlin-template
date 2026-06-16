@@ -1,4 +1,4 @@
-package com.example.testandroid.components
+package com.example.testandroid.components.upload
 
 import android.content.Context
 import android.content.Intent
@@ -40,8 +40,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.testandroid.components.FileCard
 import com.example.testandroid.cores.utils.openExternally
-import com.example.testandroid.viewModels.UploadViewModel
 
 enum class FileSource { Images, Files, All }
 

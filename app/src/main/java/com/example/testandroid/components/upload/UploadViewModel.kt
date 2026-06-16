@@ -1,4 +1,4 @@
-package com.example.testandroid.viewModels
+package com.example.testandroid.components.upload
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

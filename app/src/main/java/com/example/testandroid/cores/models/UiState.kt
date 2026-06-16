@@ -1,4 +1,4 @@
-package com.example.testandroid.cores.helpers
+package com.example.testandroid.cores.models
 
 sealed class UiState<out T> {
     data object Idle : UiState<Nothing>()

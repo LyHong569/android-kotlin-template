@@ -3,7 +3,7 @@ package com.example.testandroid.features.auth.login.presentation.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testandroid.cores.datastores.SessionManager
-import com.example.testandroid.cores.helpers.UiState
+import com.example.testandroid.cores.models.UiState
 import com.example.testandroid.features.auth.login.domain.AuthModel
 import com.example.testandroid.features.auth.login.domain.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

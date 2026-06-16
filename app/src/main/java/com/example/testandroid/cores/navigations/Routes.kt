@@ -14,6 +14,3 @@ data object Profile : NavKey
 // Dashboard
 @Serializable
 data object Dashboard : NavKey
-
-//@Serializable data object ProductList                      : NavKey
-//@Serializable data class  ProductDetail(val id: Int)       : NavKey

@@ -20,8 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.testandroid.cores.locales.Language
-import com.example.testandroid.cores.locales.appLanguages
+import com.example.testandroid.cores.models.AppLanguages
+import com.example.testandroid.cores.models.Language
 
 @Composable
 fun ProfileLocaleBottomSheet(
@@ -50,7 +50,7 @@ fun SettingContent(
             modifier = Modifier.padding(paddingValues)
         ) {
             LazyColumn {
-                items(appLanguages) { language ->
+                items(AppLanguages) { language ->
                     LanguageRow(
                         language = language,
                         isSelected = language.code == selectedLanguage,

@@ -1,6 +1,6 @@
 package com.example.testandroid.features.auth.login.domain
 
-import com.example.testandroid.cores.network.BaseResponse
+import com.example.testandroid.cores.models.BaseResponse
 
 data class AuthModel(
     override val message: String? = null,

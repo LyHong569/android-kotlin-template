@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.OpenableColumns
-import com.example.testandroid.components.FileMeta
+import com.example.testandroid.components.upload.FileMeta
 
 fun queryFileMeta(context: Context, uri: Uri): FileMeta {
     val cr = context.contentResolver

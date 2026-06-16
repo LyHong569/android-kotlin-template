@@ -20,7 +20,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.testandroid.components.TextInputField
 import com.example.testandroid.components.TextInputFieldProps
-import com.example.testandroid.cores.helpers.UiState
+import com.example.testandroid.cores.models.UiState
 import com.example.testandroid.cores.navigations.Dashboard
 import com.example.testandroid.cores.navigations.Navigator
 

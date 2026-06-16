@@ -52,17 +52,19 @@ fun TextInputField(value: String, onValueChange: (String) -> Unit, props: TextIn
             leadingIcon = props.leadingIcon,
             trailingIcon = props.trailingIcon,
 
-            singleLine = props.singleLine
+            singleLine = props.singleLine,
+
+            supportingText = {
+                if (!props.errorMessage.isNullOrBlank()) {
+                    Text(
+                        text = props.errorMessage,
+                        color = Color.Red,
+                        fontSize = 12.sp
+                    )
+                }
+
+            }
         )
-
-        if (!props.errorMessage.isNullOrBlank()) {
-            Text(
-                text = props.errorMessage,
-                color = Color.Red,
-                fontSize = 12.sp
-            )
-        }
-
     }
 }
 
