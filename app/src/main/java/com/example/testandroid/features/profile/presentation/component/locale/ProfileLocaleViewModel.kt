@@ -13,7 +13,7 @@ data class LocaleState(
 
 @HiltViewModel
 class ProfileLocaleViewModel @Inject constructor(
-    private val appLocaleManager: AppLocaleManager
+    private val appLocaleManager: AppLocaleManager,
 ) : ViewModel() {
 
     private val _localeState = MutableStateFlow(LocaleState())

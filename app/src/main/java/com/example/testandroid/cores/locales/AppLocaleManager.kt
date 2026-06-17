@@ -41,4 +41,5 @@ class AppLocaleManager @Inject constructor(
     private fun getDefaultLanguageCode(): String {
         return AppLanguages.first().code
     }
+
 }

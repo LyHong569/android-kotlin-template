@@ -16,9 +16,11 @@ class MainViewModel @Inject constructor(
     val authState = sessionManager.authState
     val isConnect = connectivityObserver.isConnected
 
+
     init {
         viewModelScope.launch {
             sessionManager.validateSession()
         }
     }
+
 }

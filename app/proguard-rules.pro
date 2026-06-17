@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# DTOs / network layer — Gson serialization
+-keep class com.example.testandroid.cores.network.** { *; }
+-keep class com.example.testandroid.cores.models.** { *; }
+
+# Feature data layers — add as you create more features
+-keep class com.example.testandroid.features.**.data.** { *; }
+-keep class com.example.testandroid.features.**.domain.** { *; }

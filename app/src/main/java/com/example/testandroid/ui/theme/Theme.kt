@@ -11,7 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.intl.Locale
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.testandroid.cores.commons.AppFonts
+import com.example.testandroid.cores.commons.appTypography
 import com.example.testandroid.cores.models.ThemeMode
 
 private val DarkColorScheme = darkColorScheme(
@@ -66,10 +69,12 @@ fun TestAndroidTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+    val fontFamily = AppFonts.forLocale(Locale.current)
+    val typography = appTypography(fontFamily)
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = typography,
         content = content
     )
 }
