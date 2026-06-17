@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -23,6 +24,7 @@ import com.example.testandroid.components.TextInputFieldProps
 import com.example.testandroid.cores.models.UiState
 import com.example.testandroid.cores.navigations.Dashboard
 import com.example.testandroid.cores.navigations.Navigator
+import com.example.testandroid.features.auth.login.domain.LoginFormEvent
 
 @Composable
 fun LoginScreen(
@@ -45,23 +47,29 @@ fun LoginScreen(
                 .padding(horizontal = 20.dp)
         ) {
             TextInputField(
-                value = formState.username,
-                onValueChange = viewModel::onUsernameUpdate,
-                props = TextInputFieldProps(label = "Identity")
+                value = formState.username.value,
+                onValueChange = { value -> viewModel.onEvent(LoginFormEvent.UsernameChanged(value)) },
+                props = TextInputFieldProps(
+                    label = "Identity",
+                    errorMessage = if (formState.username.hasError) formState.username.errorMessage else null,
+                ),
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             TextInputField(
-                value = formState.password,
-                onValueChange = viewModel::onPasswordUpdate,
-                props = TextInputFieldProps(label = "Password")
+                value = formState.password.value,
+                onValueChange = { value -> viewModel.onEvent(LoginFormEvent.PasswordChanged(value)) },
+                props = TextInputFieldProps(
+                    label = "Password",
+                    errorMessage = if (formState.password.hasError) formState.password.errorMessage else null,
+                )
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             Button(
-                onClick = viewModel::login,
+                onClick = { viewModel.onEvent(LoginFormEvent.Submit) },
                 enabled = uiState !is UiState.Loading,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -77,7 +85,7 @@ fun LoginScreen(
 
             if (uiState is UiState.Error) {
                 Spacer(modifier = Modifier.height(12.dp))
-                Text(text = (uiState as UiState.Error).message)
+                Text(text = (uiState as UiState.Error).message, color = Color.Red)
             }
         }
     }
