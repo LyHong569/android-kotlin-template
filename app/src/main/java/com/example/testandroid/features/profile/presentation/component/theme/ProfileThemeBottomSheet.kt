@@ -20,43 +20,36 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.testandroid.cores.models.AppLanguages
-import com.example.testandroid.features.profile.presentation.component.locale.ProfileLocaleViewModel
+import com.example.testandroid.cores.models.ThemeMode
 
 @Composable
-fun ProfileLocaleBottomSheet(
-    localeViewModel: ProfileLocaleViewModel = hiltViewModel()
+fun ProfileThemeBottomSheet(
+    themeViewModel: ProfileThemeViewModel = hiltViewModel()
 ) {
-    val settingState by localeViewModel.localeState.collectAsState()
-
-    val onAppLocaleChanged: (String) -> Unit = { locale ->
-        localeViewModel.changeLanguage(locale)
-    }
+    val settingState by themeViewModel.themeState.collectAsState()
 
     SettingContent(
-        selectedLocale = settingState.selectedLanguage,
-        onAppLocaleChanged = onAppLocaleChanged
+        selectedTheme = settingState.selectedTheme,
+        onAppThemeChanged = themeViewModel::setTheme
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingContent(
-    selectedLocale: String,
-    onAppLocaleChanged: (String) -> Unit,
+    selectedTheme: ThemeMode,
+    onAppThemeChanged: (ThemeMode) -> Unit,
 ) {
     Scaffold { paddingValues ->
         Box(
             modifier = Modifier.padding(paddingValues)
         ) {
             LazyColumn {
-                items(AppLanguages.toTypedArray()) { locale ->
-                    LocaleRow(
-                        locale = locale.displayLanguage,
-                        isSelected = locale.code == selectedLocale,
-                        onClick = {
-                            onAppLocaleChanged(locale.code)
-                        }
+                items(ThemeMode.entries.toTypedArray()) { theme ->
+                    ThemeRow(
+                        theme = theme,
+                        isSelected = theme == selectedTheme,
+                        onClick = { onAppThemeChanged(theme) }
                     )
                 }
             }
@@ -65,8 +58,8 @@ fun SettingContent(
 }
 
 @Composable
-fun LocaleRow(
-    locale: String,
+fun ThemeRow(
+    theme: ThemeMode,
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
@@ -79,7 +72,7 @@ fun LocaleRow(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            Text(text = locale)
+            Text(text = "$theme")
         }
 
         RadioButton(

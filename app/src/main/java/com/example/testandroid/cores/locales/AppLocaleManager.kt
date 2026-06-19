@@ -20,7 +20,8 @@ class AppLocaleManager @Inject constructor(
 
     fun changeLanguage(languageCode: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            context.getSystemService(LocaleManager::class.java).applicationLocales =
+            // https://stackoverflow.com/questions/76793407/how-to-prevent-screen-flash-on-locale-change-in-jetpack-compose-with-appcompat
+            context.getSystemService(LocaleManager::class.java)?.applicationLocales =
                 LocaleList.forLanguageTags(languageCode)
         } else {
             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(languageCode))

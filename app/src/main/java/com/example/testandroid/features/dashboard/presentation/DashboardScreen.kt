@@ -9,14 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.testandroid.R
-import com.example.testandroid.features.profile.presentation.component.theme.ProfileLocaleBottomSheet
 
 @Composable
 fun DashboardScreen(viewModel: DashboardViewModel = hiltViewModel()) {
     Scaffold { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             Text(text = stringResource(R.string.hello_world))
-            ProfileLocaleBottomSheet()
         }
     }
 }
