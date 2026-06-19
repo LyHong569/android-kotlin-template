@@ -23,7 +23,7 @@
         android:theme="@style/Theme.TestAndroid">
         <activity
             android:name=".MainActivity"
-            android:configChanges="locale|layoutDirection"
+            android:configChanges="locale|layoutDirection|fontScale|screenSize|screenLayout|uiMode"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.TestAndroid">
