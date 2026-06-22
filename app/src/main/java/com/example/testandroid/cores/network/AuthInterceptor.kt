@@ -1,8 +1,8 @@
 package com.example.testandroid.cores.network
 
 import com.example.testandroid.BuildConfig
-import com.example.testandroid.cores.datastores.SessionManager
-import com.example.testandroid.cores.datastores.TokenManager
+import com.example.testandroid.cores.managers.SessionManager
+import com.example.testandroid.cores.managers.TokenManager
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Interceptor

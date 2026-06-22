@@ -1,4 +1,4 @@
-package com.example.testandroid.cores.permissions
+package com.example.testandroid.cores.models
 
 import android.Manifest
 import android.os.Build

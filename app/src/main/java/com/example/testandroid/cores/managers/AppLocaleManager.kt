@@ -1,4 +1,4 @@
-package com.example.testandroid.cores.locales
+package com.example.testandroid.cores.managers
 
 import android.app.LocaleManager
 import android.content.Context
@@ -10,7 +10,6 @@ import com.example.testandroid.cores.models.AppLanguages
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
-
 
 // https://blog.kotlin-academy.com/localization-in-jetpack-compose-71b7f7233243
 @Singleton

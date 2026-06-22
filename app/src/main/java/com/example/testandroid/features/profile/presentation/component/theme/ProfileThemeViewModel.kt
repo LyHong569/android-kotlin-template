@@ -2,7 +2,7 @@ package com.example.testandroid.features.profile.presentation.component.theme
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.testandroid.cores.datastores.AppThemeManager
+import com.example.testandroid.cores.managers.AppThemeManager
 import com.example.testandroid.cores.models.ThemeMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted

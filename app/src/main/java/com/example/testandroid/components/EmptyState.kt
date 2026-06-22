@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 enum class EmptyStateType {
-    WIFI, DATA
+    WIFI, DATA, SERVER
 }
 
 private const val NO_CONNECTION_TITLE = "No Connection"
@@ -28,6 +28,7 @@ fun EmptyState(
     title: String,
     description: String,
     type: EmptyStateType = EmptyStateType.DATA,
+    onRetry: () -> Unit = {},
     isConnected: Boolean = true,
 ) {
     val displayTitle = if (!isConnected) NO_CONNECTION_TITLE else title
@@ -60,6 +61,7 @@ fun EmptyState(
 private fun getEmptyStateIcon(type: EmptyStateType): Unit { // ImageVector
     return when (type) {
         EmptyStateType.WIFI -> Unit
+        EmptyStateType.DATA -> Unit
         else -> Unit
     }
 }

@@ -1,10 +1,11 @@
-package com.example.testandroid.cores.permissions
+package com.example.testandroid.cores.managers
 
+import com.example.testandroid.cores.models.AppPermission
+import com.example.testandroid.cores.models.PermissionRequest
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
 import javax.inject.Singleton
-
 
 @Singleton
 class PermissionManager @Inject constructor() {
@@ -34,4 +35,3 @@ class PermissionManager @Inject constructor() {
         )
     }
 }
-

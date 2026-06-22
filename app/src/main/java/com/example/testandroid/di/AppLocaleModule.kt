@@ -1,7 +1,7 @@
 package com.example.testandroid.di
 
 import android.content.Context
-import com.example.testandroid.cores.locales.AppLocaleManager
+import com.example.testandroid.cores.managers.AppLocaleManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

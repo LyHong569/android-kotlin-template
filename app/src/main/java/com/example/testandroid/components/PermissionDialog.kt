@@ -14,9 +14,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import com.example.testandroid.cores.permissions.AppPermission
-import com.example.testandroid.cores.permissions.PermissionManager
-import com.example.testandroid.cores.permissions.PermissionRequest
+import com.example.testandroid.cores.models.AppPermission
+import com.example.testandroid.cores.managers.PermissionManager
+import com.example.testandroid.cores.models.PermissionRequest
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState

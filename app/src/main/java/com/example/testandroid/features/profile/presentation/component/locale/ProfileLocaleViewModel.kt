@@ -1,7 +1,7 @@
 package com.example.testandroid.features.profile.presentation.component.locale
 
 import androidx.lifecycle.ViewModel
-import com.example.testandroid.cores.locales.AppLocaleManager
+import com.example.testandroid.cores.managers.AppLocaleManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

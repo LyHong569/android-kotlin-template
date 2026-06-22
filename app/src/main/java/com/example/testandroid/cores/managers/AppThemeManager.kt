@@ -1,4 +1,4 @@
-package com.example.testandroid.cores.datastores
+package com.example.testandroid.cores.managers
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

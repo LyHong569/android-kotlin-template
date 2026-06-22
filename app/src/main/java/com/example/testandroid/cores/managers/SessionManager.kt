@@ -1,4 +1,4 @@
-package com.example.testandroid.cores.datastores
+package com.example.testandroid.cores.managers
 
 import com.example.testandroid.features.auth.login.domain.AuthRepository
 import com.example.testandroid.features.auth.login.domain.AuthState
@@ -6,6 +6,7 @@ import dagger.Lazy
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import retrofit2.HttpException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,7 +33,7 @@ class SessionManager @Inject constructor(
             } else {
                 _validationState.value = AuthState.Unauthenticated
             }
-        } catch (e: retrofit2.HttpException) {
+        } catch (e: HttpException) {
             tokenManager.clearTokens()
             _validationState.value = AuthState.Unauthenticated
         } catch (e: Exception) {
