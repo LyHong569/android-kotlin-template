@@ -1,6 +1,7 @@
 package com.example.testandroid.features.dashboard.presentation
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -10,9 +11,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.testandroid.R
 import com.example.testandroid.components.EmptyState
 import com.example.testandroid.cores.models.UiState
+import com.example.testandroid.cores.navigations.Navigator
+import com.example.testandroid.cores.navigations.Profile
 
 @Composable
-fun DashboardScreen(viewModel: DashboardViewModel = hiltViewModel()) {
+fun DashboardScreen(navigator: Navigator, viewModel: DashboardViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isConnected by viewModel.isConnected.collectAsStateWithLifecycle()
     Column {
@@ -31,6 +34,7 @@ fun DashboardScreen(viewModel: DashboardViewModel = hiltViewModel()) {
 
             else -> {
                 Text(text = stringResource(R.string.hello_world))
+                Button(onClick = { navigator.navigate(Profile) }) { Text("Profile") }
             }
         }
     }
