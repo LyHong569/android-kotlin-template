@@ -7,9 +7,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 data class SnackbarMessage(
     val id: Long = System.currentTimeMillis(),
     val message: String,
-    val actionLabel: String? = null,
     val duration: SnackbarDuration = SnackbarDuration.Short,
-    val type: SnackbarType = SnackbarType.Default
+    val type: SnackbarType = SnackbarType.Default,
+    val actionLabel: String? = null,
+    val onAction: (() -> Unit)? = null
 )
 
 enum class SnackbarType { Default, Success, Error, Warning }
@@ -21,24 +22,19 @@ object SnackbarManager {
     )
     val messages = _messages.asSharedFlow()
 
-    private fun show(message: SnackbarMessage) {
-        _messages.tryEmit(message)
+    fun show(
+        message: String,
+        type: SnackbarType = SnackbarType.Default,
+        actionLabel: String? = null,
+        onAction: (() -> Unit)? = null
+    ) {
+        _messages.tryEmit(
+            SnackbarMessage(
+                message = message,
+                type = type,
+                actionLabel = actionLabel,
+                onAction = onAction
+            )
+        )
     }
-
-    fun info(message: String) = show(
-        SnackbarMessage(message = message, type = SnackbarType.Default)
-    )
-
-
-    fun success(message: String) = show(
-        SnackbarMessage(message = message, type = SnackbarType.Success)
-    )
-
-    fun error(message: String) = show(
-        SnackbarMessage(message = message, type = SnackbarType.Error)
-    )
-
-    fun warning(message: String) = show(
-        SnackbarMessage(message = message, type = SnackbarType.Warning)
-    )
 }
