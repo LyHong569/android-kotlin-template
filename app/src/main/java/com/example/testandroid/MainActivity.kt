@@ -18,11 +18,12 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.testandroid.components.NetworkStatusBar
 import com.example.testandroid.components.PermissionDialogHandler
+import com.example.testandroid.components.remoteConfig.RemoteConfigDialog
+import com.example.testandroid.cores.managers.PermissionManager
 import com.example.testandroid.cores.navigations.AppNavigation
 import com.example.testandroid.cores.navigations.Dashboard
 import com.example.testandroid.cores.navigations.Login
 import com.example.testandroid.cores.navigations.Navigator
-import com.example.testandroid.cores.managers.PermissionManager
 import com.example.testandroid.features.auth.login.domain.AuthState
 import com.example.testandroid.ui.theme.TestAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,6 +65,7 @@ class MainActivity : ComponentActivity() {
             }
 
             TestAndroidTheme {
+                RemoteConfigDialog()
                 Scaffold(
                     bottomBar = {
                         NetworkStatusBar(isConnected)

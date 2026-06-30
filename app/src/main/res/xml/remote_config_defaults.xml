@@ -1,0 +1,18 @@
+<defaultsMap>
+    <entry>
+        <key>android_current_version</key>
+        <value>1.0.0</value>
+    </entry>
+    <entry>
+        <key>android_maintenance</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>android_store_url</key>
+        <value>https://play.google.com/store/apps/details?id=com.eclock.android</value>
+    </entry>
+    <entry>
+        <key>android_update_required</key>
+        <value>false</value>
+    </entry>
+</defaultsMap>

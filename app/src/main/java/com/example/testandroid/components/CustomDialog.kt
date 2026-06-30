@@ -5,53 +5,64 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 
 @Composable
-fun CustomDialog() {
-    var openAlert by remember { mutableStateOf(false) }
-
-    Button(
-        onClick = { openAlert = true },
-        modifier = Modifier
-            .width(200.dp)
-            .height(50.dp)
+fun CustomDialog(
+    title: String,
+    description: String?,
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit,
+    hasDismissButton: Boolean = true,
+    confirmText: String = "Confirm",
+    dismissText: String = "Not Now",
+) {
+    Dialog(
+        onDismissRequest = { if (hasDismissButton) onDismiss() },
+        properties = DialogProperties(
+            dismissOnBackPress = hasDismissButton,
+            dismissOnClickOutside = hasDismissButton
+        )
     ) {
-        Text(text = "Click me!")
-    }
-
-    if (openAlert) {
-        Dialog(onDismissRequest = { openAlert = false }) {
-            DialogContent(onDismiss = { openAlert = false })
-        }
+        DialogContent(
+            title = title,
+            description = description,
+            onDismiss = onDismiss,
+            onConfirm = onConfirm,
+            hasDismissButton = hasDismissButton,
+            confirmText = confirmText,
+            dismissText = dismissText
+        )
     }
 }
 
 @Composable
-fun DialogContent(onDismiss: () -> Unit) {
+private fun DialogContent(
+    title: String,
+    description: String?,
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit,
+    hasDismissButton: Boolean,
+    confirmText: String,
+    dismissText: String,
+) {
     Card(
         shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.padding(10.dp, 5.dp, 10.dp, 5.dp),
+        modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(
@@ -59,50 +70,54 @@ fun DialogContent(onDismiss: () -> Unit) {
         ) {
             Column(Modifier.padding(16.dp)) {
                 Text(
-                    text = "Get Updates",
+                    text = title,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .padding(top = 5.dp)
                         .fillMaxWidth(),
                     style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
                 )
 
-                Text(
-                    text = "Allow permisson to send notifications when new update added on play store!",
-
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(10.dp, 25.dp, 25.dp, 25.dp)
-                        .fillMaxWidth(),
-                    style = MaterialTheme.typography.bodyMedium
-
-                )
+                if (!description.isNullOrEmpty()) {
+                    Text(
+                        text = description,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .padding(top = 16.dp, bottom = 8.dp)
+                            .fillMaxWidth(),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
             }
 
             Row(
-                Modifier
+                modifier = Modifier
                     .padding(top = 10.dp)
                     .fillMaxWidth()
                     .background(MaterialTheme.colorScheme.background),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                TextButton(onClick = { onDismiss() }) {
-                    Text(
-                        text = "Not now", fontWeight = FontWeight.Bold, color = Color.Blue,
-                        modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
-                    )
+                if (hasDismissButton) {
+                    TextButton(onClick = onDismiss) {
+                        Text(
+                            text = dismissText,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Gray,
+                            modifier = Modifier.padding(vertical = 5.dp)
+                        )
+                    }
                 }
 
-                TextButton(onClick = { onDismiss() }) {
+                TextButton(onClick = onConfirm) {
                     Text(
-                        text = "Allow", fontWeight = FontWeight.Bold, color = Color.Black,
-                        modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
+                        text = confirmText,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(vertical = 5.dp)
                     )
                 }
             }
-
         }
-
-
     }
 }
