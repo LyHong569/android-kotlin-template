@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -52,12 +51,9 @@ class MainActivity : ComponentActivity() {
 
             if (authState == AuthState.Loading) return@setContent
 
-            val navigator = key(authState) {
-                remember {
-                    val initialRoute =
-                        if (authState == AuthState.Authenticated) Dashboard else Login
-                    Navigator(initialRoute)
-                }
+            val navigator = remember {
+                val initialRoute = if (authState == AuthState.Authenticated) Dashboard else Login
+                Navigator(initialRoute)
             }
 
             LaunchedEffect(authState) {
@@ -65,7 +61,6 @@ class MainActivity : ComponentActivity() {
             }
 
             TestAndroidTheme {
-                RemoteConfigDialog()
                 Scaffold(
                     bottomBar = {
                         NetworkStatusBar(isConnected)
@@ -77,11 +72,10 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding)
                     ) {
                         AppNavigation(navigator = navigator)
+                        RemoteConfigDialog()
+                        PermissionDialogHandler(permissionManager)
                     }
-
-                    PermissionDialogHandler(permissionManager)
                 }
-
             }
         }
     }
