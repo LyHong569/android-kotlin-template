@@ -5,8 +5,10 @@ coilCompose = "3.4.0"
 converterGson = "3.0.0"
 coreKtx = "1.18.0"
 coreSplashscreen = "1.2.0"
+credentials = "1.6.0"
 datastorePreferences = "1.2.1"
 firebaseBom = "34.15.0"
+googleid = "1.2.0"
 hiltAndroid = "2.59.2"
 hiltNavigationCompose = "1.3.0"
 junit = "4.13.2"
@@ -33,6 +35,8 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 
 # Datastore
+androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
+androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 
 # Nav3
@@ -45,6 +49,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 google-firebase-config = { module = "com.google.firebase:firebase-config" }
 google-firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
 
 # Coil

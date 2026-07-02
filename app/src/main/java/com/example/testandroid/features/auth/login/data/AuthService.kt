@@ -10,4 +10,7 @@ interface AuthService {
 
     @POST("/auth/authenticated")
     suspend fun authenticated(): AuthResponseDTO
+
+    @POST("/auth/login-with-google")
+    suspend fun authGoogleLogin(@Body request: GoogleLoginRequest): AuthResponseDTO
 }

@@ -34,4 +34,9 @@ class AuthRepositoryImpl @Inject constructor(
         val res = authService.authenticated()
         return convertResponse(res)
     }
+
+    override suspend fun authGoogleLogin(idToken: String): AuthModel {
+        val res = authService.authGoogleLogin(GoogleLoginRequest(idToken))
+        return convertResponse(res)
+    }
 }

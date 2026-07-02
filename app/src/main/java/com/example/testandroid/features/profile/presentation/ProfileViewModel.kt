@@ -2,6 +2,7 @@ package com.example.testandroid.features.profile.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.testandroid.cores.managers.GoogleAuthManager
 import com.example.testandroid.cores.managers.SessionManager
 import com.example.testandroid.cores.models.UiState
 import com.example.testandroid.features.auth.login.domain.AuthModel
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val sessionManager: SessionManager) :
+class ProfileViewModel @Inject constructor(
+    private val sessionManager: SessionManager,
+    private val googleAuthManager: GoogleAuthManager
+) :
     ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<AuthModel>>(UiState.Idle)
@@ -23,6 +27,7 @@ class ProfileViewModel @Inject constructor(private val sessionManager: SessionMa
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             try {
+                googleAuthManager.signOut()
                 sessionManager.logout()
                 UiState.Success(null)
             } catch (e: Exception) {

@@ -41,6 +41,12 @@ android {
             "API_SECRET_KEY_VALUE",
             "\"${localProperties["API_SECRET_KEY_VALUE"]}\""
         )
+        buildConfigField(
+            "String",
+            "GOOGLE_WEB_CLIENT_ID",
+            "\"${localProperties["GOOGLE_WEB_CLIENT_ID"]}\""
+        )
+
 
     }
 
@@ -131,4 +137,9 @@ dependencies {
     implementation(libs.google.firebase.config)
     implementation(libs.google.firebase.messaging)
     implementation(libs.firebase.analytics)
+
+    // Google SignIn
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
 }

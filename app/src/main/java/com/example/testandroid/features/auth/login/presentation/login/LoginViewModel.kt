@@ -1,7 +1,9 @@
 package com.example.testandroid.features.auth.login.presentation.login
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.testandroid.cores.managers.GoogleAuthManager
 import com.example.testandroid.cores.managers.SessionManager
 import com.example.testandroid.cores.models.UiState
 import com.example.testandroid.features.auth.login.domain.AuthModel
@@ -20,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val sessionManager: SessionManager
+    private val sessionManager: SessionManager,
+    private val googleAuthManager: GoogleAuthManager,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<AuthModel>>(UiState.Idle)
@@ -89,6 +92,25 @@ class LoginViewModel @Inject constructor(
                 UiState.Success(result)
             } catch (e: Exception) {
                 UiState.Error(e.message ?: "Unknown error")
+            }
+        }
+    }
+
+    fun signInWithGoogle(activityContext: Context) {
+        viewModelScope.launch {
+            _uiState.value = UiState.Loading
+            try {
+                val credential = googleAuthManager.signIn(activityContext)
+                val idToken = credential.idToken
+
+                val result = authRepository.authGoogleLogin(idToken)
+                sessionManager.login(result.token)
+                _uiState.value = UiState.Success(result)
+
+            } catch (e: androidx.credentials.exceptions.GetCredentialException) {
+                _uiState.value = UiState.Error(e.message ?: "Sign-in failed")
+            } catch (e: Exception) {
+                _uiState.value = UiState.Error(e.message ?: "Unknown error")
             }
         }
     }
